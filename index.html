@@ -4,7 +4,102 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- import jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- import bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/index.css" />
+
     <title>Meadowbank Collection Center</title>
   </head>
-  <body></body>
+  <body>
+    <!-- header start -->
+    <header class="d-flex">
+      <div class="container d-flex align-items-center">
+        <strong>Meadowbank Collection Center</strong>
+      </div>
+    </header>
+
+    <!-- container start -->
+    <div class="container">
+      <br class="mb-3" />
+      <div class="well well-sm">
+        <h3><strong>Contact Us</strong></h3>
+      </div>
+      <br class="mb-3" />
+
+      <div class="row">
+        <div class="col-md-8">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3736489.7218514383!2d90.21589792292741!3d23.857125486636733!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1506502314230"
+            width="100%"
+            height="500"
+            frameborder="0"
+            style="border:0"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="col-md-4">
+          <h4><strong>Address</strong></h4>
+          <address>
+            <p id="address"></p>
+          </address>
+
+          <h4><strong>Open Hours</strong></h4>
+          <address>
+            <p id="hours"></p>
+          </address>
+
+          <address>
+            <strong>Phone Number</strong><br />
+            <a href="tel:"></a>
+          </address>
+        </div>
+      </div>
+    </div>
+    <br class="mb-10" />
+    <br class="mb-10" />
+    <br class="mb-10" />
+
+    <!-- footer start -->
+    <footer lass="d-flex">
+      <div class="container d-flex justify-content-md-around">
+        <button id="contect-button" class="btn">
+          Contect us online
+        </button>
+        <button id="call-button" class="btn">
+          Call
+        </button>
+        <button id="find-button" class="btn">
+          Find Collection center
+        </button>
+      </div>
+    </footer>
+
+    <script>
+      // fetch data
+      $(document).ready(function() {
+        $.ajax({
+          type: "GET",
+          url:
+            "http://lab-database.digitalmachine.co.nz/wp-json/labtests/v1/centres/meadowbank-collection-centre",
+          data: {},
+          success: function(data) {
+            // validtate data type
+            if (Array.isArray(data)) {
+              var fetchResult = data[0];
+
+              $("#address").text(fetchResult.address);
+            } else {
+              console.log("wrong data type!");
+            }
+          },
+          error: function(data) {
+            alert("error");
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
