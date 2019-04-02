@@ -3,11 +3,29 @@ header {
   height: 150px;
 }
 
+/* name style */
+#name {
+  font-size: 36px;
+  color: #4d4e4f
+}
+
+/* button style */
 .btn {
   width: 250px;
   background: orange;
   border-radius: 30px;
   margin-top: -15px;
+  color: white;
+}
+
+/* Set size of google map */
+#map {
+  height: 500px;
+  width: 100%;
+}
+
+a {
+  color: orange;
 }
 
 footer {
