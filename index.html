@@ -8,15 +8,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- import bootstrap -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- import sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <link rel="stylesheet" href="css/index.css" />
 
-    <title>Meadowbank Collection Center</title>
+    <title id="slug"></title>
   </head>
   <body>
     <!-- header start -->
     <header class="d-flex">
       <div class="container d-flex align-items-center">
-        <strong>Meadowbank Collection Center</strong>
+        <strong id="name"></strong>
       </div>
     </header>
 
@@ -28,6 +30,7 @@
       </div>
       <br class="mb-3" />
 
+      <!-- google map -->
       <div class="row">
         <div class="col-md-8">
           <iframe
@@ -40,20 +43,23 @@
           ></iframe>
         </div>
 
+        <!-- detail -->
         <div class="col-md-4">
           <h4><strong>Address</strong></h4>
           <address>
             <p id="address"></p>
+            <p id="street"></p>
+            <p id="region"></p>
+            <p id="city"></p>
+            <p id="post_code"></p>
           </address>
-
           <h4><strong>Open Hours</strong></h4>
           <address>
-            <p id="hours"></p>
+            <div id="hours"></div>
           </address>
-
+          <h4><strong>Phone Number</strong></h4>
           <address>
-            <strong>Phone Number</strong><br />
-            <a href="tel:"></a>
+            <div id="phone"></div>
           </address>
         </div>
       </div>
@@ -88,9 +94,38 @@
           success: function(data) {
             // validtate data type
             if (Array.isArray(data)) {
-              var fetchResult = data[0];
+              var fetchResult = data[0] || {};
 
+              // name
+              $("#name").text(fetchResult.name);
+
+              // name
+              $("#slug").text(fetchResult.slug);
+
+              // address
               $("#address").text(fetchResult.address);
+              $("#street").text(fetchResult.street);
+              $("#region").text(fetchResult.region);
+              $("#city").text(fetchResult.city);
+              $("#post_code").text(fetchResult.post_code);
+
+              // openhousrs
+              var openHousrsHTML = "";
+              var i;
+              var j = fetchResult.opening_hours.length || 0;
+              for (i = 0; i < j; i++) {
+                openHousrsHTML += "<p>" + fetchResult.opening_hours[i] + "</p>";
+              }
+              $("#hours").html(openHousrsHTML);
+
+              // phoneNumber
+              var phoneNumberHTML =
+                '<p> <a href="tel:' +
+                fetchResult.phone_number +
+                '">' +
+                fetchResult.phone_number +
+                "</a></p>";
+              $("#phone").html(phoneNumberHTML);
             } else {
               console.log("wrong data type!");
             }
@@ -98,6 +133,16 @@
           error: function(data) {
             alert("error");
           }
+        });
+      });
+
+      // click event
+      $(function() {
+        $(".btn").click(function(e) {
+          Swal.fire({
+            title: "Clicked",
+            text: "Button click event triggered",
+          });
         });
       });
     </script>
