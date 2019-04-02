@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <!-- import sweetalert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <!-- import fontaweson -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
 
     <script
       type="text/javascript"
@@ -65,7 +72,7 @@
         </div>
       </div>
     </div>
-    
+
     <br class="mb-10" />
     <br class="mb-10" />
     <br class="mb-10" />
@@ -73,14 +80,12 @@
     <!-- footer start -->
     <footer lass="d-flex">
       <div class="container d-flex justify-content-md-around">
-        <button id="contect-button" class="btn">
-          Contect us online
+        <button id="contect-button" class="btn btn-click">
+          <i class="fas fa-desktop"></i>Contect us online
         </button>
-        <button id="call-button" class="btn">
-          Call
-        </button>
-        <button id="find-button" class="btn">
-          Find Collection center
+        <button id="call-button" class="btn"></button>
+        <button id="find-button" class="btn btn-click">
+          <i class="fas fa-map-marker-alt"></i>Find Collection center
         </button>
       </div>
     </footer>
@@ -107,7 +112,7 @@
               // name
               $("#name").text(fetchResult.name);
 
-              // name
+              // slug
               $("#slug").text(fetchResult.slug);
 
               // address
@@ -135,9 +140,18 @@
                 "</a></p>";
               $("#phone").html(phoneNumberHTML);
 
+              // phoneNumber buttom button
+              var phoneNumberButtonHTML =
+                '<i class="fas fa-phone"></i><a href="tel:' +
+                fetchResult.phone_number +
+                '">' +
+                fetchResult.phone_number +
+                "</a>";
+              $("#call-button").html(phoneNumberButtonHTML);
+
               // view on google map
               var viewOnMapHTML =
-                '<p> <a href="https://www.google.com/maps/place/' +
+                '<p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps/place/' +
                 fetchResult.street.replace(" ", "+") +
                 "," +
                 fetchResult.region.replace(" ", "+") +
@@ -167,7 +181,7 @@
                 position: myLatLng,
                 title: ""
               });
-              marker.setMap(map);
+              marker.setMap(map); // set map
             } else {
               console.log("wrong data type!");
             }
@@ -180,7 +194,7 @@
 
       // click event
       $(function() {
-        $(".btn").click(function(e) {
+        $(".btn-click").click(function(e) {
           Swal.fire({
             title: "Clicked",
             text: "Button click event triggered"

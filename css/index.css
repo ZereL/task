@@ -6,10 +6,10 @@ header {
 /* name style */
 #name {
   font-size: 36px;
-  color: #4d4e4f
+  color: #4d4e4f;
 }
 
-/* button style */
+/* button styles */
 .btn {
   width: 250px;
   background: orange;
@@ -18,7 +18,24 @@ header {
   color: white;
 }
 
-/* Set size of google map */
+.btn a {
+  color: white;
+}
+
+.btn a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+/* font-awesome style */
+i {
+  padding: 10px;
+}
+
+.fa-map-marker-alt {
+  color: orange;
+}
+/* size of google map */
 #map {
   height: 500px;
   width: 100%;
